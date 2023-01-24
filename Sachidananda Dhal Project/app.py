@@ -135,7 +135,7 @@ def delete(id):
 @app.route('/search', methods=['POST'])
 def search_contacts():
   query = request.form['query']
-  search_results = ContactBook.query.filter(ContactBook.first_name.contains(query)).all()
+  search_results = ContactBook.query.filter(ContactBook.first_name.contains(query)|ContactBook.phone.contains(query)|ContactBook.last_name.contains(query)| ContactBook.gender.contains(query)).all()
   return render_template('search_results.html', contacts=search_results)
 
 app.run(host='localhost', port=5000, debug=True)
